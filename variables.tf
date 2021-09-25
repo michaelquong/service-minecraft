@@ -4,6 +4,12 @@ variable "region" {
   default     = "us-west-2"
 }
 
+variable "instance_type" {
+  description = "Size of Server to start."
+  type        = string
+  default     = "t2.micro"
+}
+
 variable "admin_ip_addresses" {
   description = "IP addresses authorized to access Instance"
   type        = list(string)

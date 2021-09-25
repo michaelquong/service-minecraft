@@ -7,6 +7,30 @@ data "aws_subnet_ids" "default" {
   vpc_id = data.aws_vpc.default.id
 }
 
+data "aws_availability_zones" "all" {}
+
+data "aws_ec2_instance_type_offering" "discover" {
+  for_each = toset(data.aws_availability_zones.all.names)
+
+  filter {
+    name   = "instance-type"
+    values = [var.instance_type]
+  }
+
+  filter {
+    name   = "location"
+    values = [each.value]
+  }
+
+  location_type = "availability-zone"
+
+  preferred_instance_types = [var.instance_type]
+}
+
+locals {
+  instance_availability_zones = keys({ for az, details in data.aws_ec2_instance_type_offering.discover : az => details.instance_type })
+}
+
 # Find the latest ubuntu image available
 data "aws_ami" "ubuntu" {
   most_recent = true

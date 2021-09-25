@@ -11,13 +11,15 @@ variable "instance_type" {
 }
 
 variable "admin_ip_addresses" {
-  description = "IP addresses authorized to access Instance"
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+  description = "Comma seperated string of IP addresses authorized to access Instance"
+  type        = string
+  default     = "0.0.0.0/0"
+  sensitive   = true
 }
 
 variable "friend_list" {
-  description = "IP addresses allowed to join to server"
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+  description = "Comma seperated string of IP addresses allowed to join to server"
+  type        = string
+  default     = "0.0.0.0/0"
+  sensitive   = true
 }

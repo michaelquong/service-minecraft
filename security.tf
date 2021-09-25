@@ -22,7 +22,7 @@ resource "aws_security_group_rule" "allow_22" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = var.admin_ip_addresses
+  cidr_blocks       = split(",", var.admin_ip_addresses)
   security_group_id = aws_security_group.minecraft.id
 }
 
@@ -31,6 +31,6 @@ resource "aws_security_group_rule" "allow_25565" {
   from_port         = 25565
   to_port           = 25565
   protocol          = "tcp"
-  cidr_blocks       = var.friend_list
+  cidr_blocks       = split(",", var.friend_list)
   security_group_id = aws_security_group.minecraft.id
 }

@@ -4,7 +4,7 @@ data "aws_vpc" "default" {
 }
 
 data "aws_subnet_ids" "default" {
-  vpc_od = data.aws_vpc.default.id
+  vpc_id = data.aws_vpc.default.id
 }
 
 # Find the latest ubuntu image available

@@ -7,7 +7,7 @@ variable "region" {
 variable "instance_type" {
   description = "Size of Server to start."
   type        = string
-  default     = "t3.micro"
+  default     = "t3.medium"
 }
 
 variable "admin_ip_addresses" {

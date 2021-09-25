@@ -8,7 +8,12 @@ write_files:
     permissions: '0755'
     content: |
       EULA=TRUE
-      VERSION=1.16.3
+      VERSION=1.17.1
+      DIFFICULTY=hard
+      MAX_PLAYERS=8
+      ALLOW_NETHER=true
+      ANNOUNCE_PLAYER_ACHIEVEMENTS=true
+      MODE=survival
   - path: /etc/systemd/system/minecraft.service
     owner: root:root
     permissions: '0755'
@@ -20,7 +25,7 @@ write_files:
         [Service]
         Restart=always
         ExecStartPre=-/usr/bin/docker rm minecraft
-        ExecStart=/usr/bin/docker run -p 25565:25565 -v /opt/minecraft:/data -v /opt/minecraft/world:/worlds/world --name minecraft --env-file /var/opt/minecraft/server.env itzg/minecraft-server
+        ExecStart=/usr/bin/docker run -p 25565:25565 -v /opt/minecraft/data:/data -v /opt/minecraft/world:/worlds/world:ro --name minecraft --env-file /var/opt/minecraft/server.env itzg/minecraft-server
         ExecStop=/usr/bin/docker stop -t 15 minecraft
         [Install]
         WantedBy=multi-user.target
